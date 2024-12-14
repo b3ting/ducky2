@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model duckies {
+  id             Int       @id @default(autoincrement())
+  location_id    Int
+  name           String    @db.VarChar(255)
+  object_created DateTime? @default(now()) @db.Timestamp(6)
+  owner_id       Int
+}
